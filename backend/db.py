@@ -3,7 +3,9 @@ from bson.objectid import ObjectId
 import os
 
 mongodb_host = os.environ.get("MONGODB_HOST", "localhost")
-connection_string = f"mongodb://root:example@{mongodb_host}"
+mongodb_username = os.environ.get("MONGODB_USERNAME", "root")
+mongodb_password = os.environ.get("MONGODB_PASSWORD", "example")
+connection_string = f"mongodb://{mongodb_username}:{mongodb_password}@{mongodb_host}"
 client = MongoClient(connection_string)
 print(f"Connecting to DB on URL: {connection_string}")
 db = client["devops_db"]

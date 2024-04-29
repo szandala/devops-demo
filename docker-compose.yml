@@ -22,7 +22,7 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_APP=main.py
-      - MONGODB_HOST=mongo
+      - MONGODB_HOST=mongodb:27017
     depends_on:
       - mongodb
     command: flask run --host=0.0.0.0 --reload

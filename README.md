@@ -54,3 +54,17 @@ Mongo korzysta z persistent Volume'ów (wykorzystaj `persistentVolumeClaimTempla
 
 ### 5.0:
 Mamy Job, który co 2 godziny, począwszy od 1:30, (czyli 1:30, 3:30, 5:30,...), od poniedziałku do piątku wykonuje backup na bazy danych mongo. Backup ma być na kolejny persistentVolume, tym razem bez claim template.
+
+### 5.5:
+Zrobienie z tego tzw. *charta Helm'owego*, który w `values.yml`:
+- definiuje obrazy
+- może opcjonalnie korzystać z `imagePullSecrets`
+- definiuje ilość poszczególnych replik.
+- definiuje rozmiary
+- pozwala podawać wszystkie zmienne
+- pozwala redefniować parametry czasowe Probe'ów
+- pozwala dodać opcjonalny `Ingress`*
+
+*`Ingress` wymaga `IngressControllera` - oddzielne zadanie, zależne od Kubernetesa, którego mamy (docker-desktop, kind, etc.)
+
+**Helm trzeba obronić 10 czerwca 2024 na zajęciach.**

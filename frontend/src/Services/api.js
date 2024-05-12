@@ -1,8 +1,9 @@
 import axios from "axios";
 
 axios.defaults.timeout = 2000;
+const backendUrl = process.env?.REACT_APP_BACKEND_URL || "localhost";
 
-const API_URL = "http://localhost:5000";
+const API_URL = `http://${backendUrl}:5000`;
 
 
 export const isAPIup = async () => {
@@ -12,9 +13,9 @@ export const isAPIup = async () => {
     });
     return true;
   } catch (error) {
-    console.log("Error occurred");
+    console.log(`Error occurred when '${API_URL}/up'`);
     if (error.code === 'ECONNABORTED') {
-      console.log('Request timed out');
+      console.log(`Request timed out for '${API_URL}/up'`);
     } else {
       console.log(error.message);
     }

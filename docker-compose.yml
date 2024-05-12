@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  backend:
+    build: backend/
+    volumes:
+    - ./backend:/app
+    ports:
+    - 5000:5000
+    environment:
+    # optional, if provided set ro and rw as itself
+    # - MONGODB_HOST=mongodb
+    # mongo read-write db endpoint
+    - MONGODB_RW_HOST=mongodb
+    # mongo read-only db endpoint
+    - MONGODB_RO_HOST=mongodb
+    # salt for generating jwt
+    - JWT_SECRET=secret
+    - MONGODB_USERNAME=root
+    - MONGODB_PASSWORD=example
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://backend:5000/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build: frontend/
+    volumes:
+    - ./frontend/src:/app/src
+    - ./frontend/public:/app/public
+    ports:
+    - 3000:3000
+    environment:
+    - REACT_APP_BACKEND_URL=localhost
+
+  mongodb:
+    image: mongo:7.0.9
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=example

@@ -7,7 +7,7 @@ mongodb_host = os.environ.get("MONGODB_HOST", "localhost")
 mongodb_rw_host = os.environ.get("MONGODB_RW_HOST", mongodb_host)  # Read-Write host
 mongodb_ro_host = os.environ.get("MONGODB_RO_HOST", mongodb_host)  # Read-Only host
 
-mongodb_username = os.environ.get("MONGODB_USERNAME", "")
+mongodb_username = os.environ.get("MONGODB_USERNAME", "root")
 mongodb_userpass = os.environ.get("MONGODB_PASSWORD", "example")
 
 # Connection strings for both Read-Write and Read-Only databases

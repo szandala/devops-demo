@@ -1,7 +1,7 @@
 # Specjalistyczne Platformy Programistyczne - Demo repo
 
-## Lab1
-Pierwsze laboratorium dotyczy utworzenia prostych kontenerów:
+## Setup
+Laboratorium dotyczy utworzenia prostych usług:
 - frontend w React'ie
 - backend we Flasku
 - baza danych MongoDB
@@ -28,7 +28,7 @@ Napisać manifesty, które tworzą namespace `student-<nr_albumu>` a w nim:
 
 Zmienne:
 - `backend`:
-    - `MONGODB_HOST` - adres headless serwisu, który SS mongodb
+    - `MONGODB_HOST` - adres headless serwisu, który prowadzi na SS mongodb
 - `mongodb`:
     - `MONGO_INITDB_ROOT_PASSWORD` - ustaw na `example`
 
@@ -46,7 +46,7 @@ StatefullSet `mongodb` ma 3 repliki:
 - 2x read-only
 
 RW jest wskazywana przez serwis Headless, którego URL jest zapisany w zmiennej `MONGODB_RW_HOST`.\
-RO są wskazywane przez inny serwis Headless, którego URL jest zapisany w zmiennej `MONGODB_RO_HOST`.\
+RO i RW (bez Helma trudno tylko RO zrobić) są wskazywane przez inny serwis Headless, którego URL jest zapisany w zmiennej `MONGODB_RO_HOST`.\
 Zmienne zastepują `MONGODB_HOST`.
 
 ### 4.5:
@@ -61,7 +61,7 @@ Zrobienie z tego tzw. *charta Helm'owego*, który w `values.yml`:
 - może opcjonalnie korzystać z `imagePullSecrets`
 - definiuje ilość poszczególnych replik.
 - definiuje rozmiary
-- pozwala podawać wszystkie zmienne
+- pozwala podawać wszystkie zmienne, które są potrzebne. Ale np. `MONGODB_RO_HOST` jest automatycznie definiowany
 - pozwala redefniować parametry czasowe Probe'ów
 - pozwala dodać opcjonalny `Ingress`*
 

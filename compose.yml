@@ -1,0 +1,48 @@
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=main.py
+      - MONGODB_HOST=mongodb:27017
+    depends_on:
+      - mongodb
+    command: flask run --host=0.0.0.0 --reload
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3001:3001"
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+    environment:
+      - REACT_APP_API_URL=http://backend:5000
+    depends_on:
+      - backend
+    command: npm start
+
+networks:
+  app-network:
+
+volumes:
+  mongo-data:
